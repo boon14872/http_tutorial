@@ -25,7 +25,8 @@ class _CodeExampleState extends State<CodeExample> {
   Future<String> _loadThemeAndCodeExample() async {
     _theme = await HighlighterTheme.loadDarkTheme();
     _highlighter = Highlighter(language: 'dart', theme: _theme);
-    _codeExampleText = await rootBundle.loadString('code/code_example.dart');
+    _codeExampleText =
+        await rootBundle.loadString('assets/code/code_example.dart');
     return _codeExampleText;
   }
 

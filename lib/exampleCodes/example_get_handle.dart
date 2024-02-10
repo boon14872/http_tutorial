@@ -130,7 +130,7 @@ class _ExampleGetStateHandler extends State<ExampleGetHandler> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ViewCodeWidget(
-                            code: 'code/code_exampleGet.dart',
+                            code: 'assets/code/code_exampleGet.dart',
                           ),
                         ),
                       );
