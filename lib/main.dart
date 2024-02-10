@@ -46,7 +46,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String url = "https://jsonplaceholder.typicode.com/users";
-  String method = 'GET';
   var responseText = 'ข้อมูลจะแสดงที่นี่';
 
   Future<void> _fetchData() async {
@@ -57,27 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final uri = Uri.parse(url);
       http.Response response;
-
-      switch (method) {
-        case 'GET':
-          response = await http.get(uri);
-          break;
-        case 'POST':
-          // Example with data in the body for POST requests:
-          response = await http.post(uri, body: {'title': 'New Post'});
-          break;
-        case 'PUT':
-          // Example with data in the body for PUT requests:
-          response =
-              await http.put(uri, body: {'id': 1, 'title': 'Updated Post'});
-          break;
-        case 'DELETE':
-          response = await http.delete(uri);
-          break;
-        default:
-          throw Exception('Unsupported method: $method');
-      }
-
+      response = await http.get(uri);
       if (response.statusCode == 200) {
         setState(() {
           responseText = response.body;
@@ -136,39 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ],
-            ),
-
-            Container(
-              margin: const EdgeInsets.only(top: 20.0),
-              child: DropdownButton<String>(
-                style: const TextStyle(color: Colors.black),
-                alignment: Alignment.center,
-                value: method,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'GET',
-                    child: Text('GET'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'POST',
-                    child: Text('POST'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'PUT',
-                    child: Text('PUT'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'DELETE',
-                    child: Text('DELETE'),
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    method = value!;
-                    responseText = ''; // Clear response when method changes
-                  });
-                },
-              ),
             ),
             Container(
               margin: const EdgeInsets.only(top: 20.0),
